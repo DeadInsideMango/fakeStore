@@ -5,6 +5,6 @@ import java.util.List;
 public interface ProductsRepository {
 
     public List<Object> getAllProducts();
-    public List<Object> getSingleProduct(Long id);
+    public List<Object> getProductById(String id);
 
 }

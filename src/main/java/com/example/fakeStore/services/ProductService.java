@@ -1,7 +1,6 @@
 package com.example.fakeStore.services;
 
 import com.example.fakeStore.repository.ProductsRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,12 +20,12 @@ public class ProductService implements ProductsRepository {
     }
 
     @Override
-    public List<Object> getSingleProduct(@NotNull Long id) {
-        String idAsString = id.toString();
-        String url = "https://fakestoreapi.com/products/" + idAsString;
+    public List<Object> getProductById(String id) {
+        String url = "https://fakestoreapi.com/products/".concat(id);
         RestTemplate restTemplate = new RestTemplate();
-        Object[] product = restTemplate.getForObject(url, Object[].class);
-        if(product != null) return Arrays.asList(product);
+        Object product = restTemplate.getForObject(url, Object.class);
+        if (product != null) return List.of(product);
         else return null;
     }
+
 }
