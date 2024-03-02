@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class ProductService implements ProductsRepository {
-    private final RestTemplate restTemplate = new RestTemplate();
+    private static final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public List<Object> getAllProducts() {

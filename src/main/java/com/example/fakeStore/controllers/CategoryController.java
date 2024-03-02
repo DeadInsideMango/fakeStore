@@ -26,7 +26,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{category}")
-    public List<Object> getAllProductsInSpecificCategory(@PathVariable("category") String category) {
+    public List<Object> getAllProductsInSpecificCategory(@PathVariable String category) {
         return categoryService.getAllProductsInSpecificCategory(category);
     }
 

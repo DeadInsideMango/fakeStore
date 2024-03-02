@@ -10,21 +10,24 @@ import java.util.List;
 @Service
 public class CategoryService implements CategoryRepository {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private static final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public List<Object> getAllCategories() {
         String url = "https://fakestoreapi.com/products/categories";
-        Object[] listOfAllCategories = restTemplate.getForObject(url, Object[].class);
-        if (listOfAllCategories == null) return Collections.emptyList();
-        return List.of(listOfAllCategories);
+        return categoryServiceHelper(url);
     }
 
     @Override
     public List<Object> getAllProductsInSpecificCategory(String category) {
-        String url = "https://fakestoreapi.com/products/categories/" + category;
-        Object[] allProductsInSpecificCategory = restTemplate.getForObject(url, Object[].class);
-        if(allProductsInSpecificCategory == null) return Collections.emptyList();
-        return List.of(allProductsInSpecificCategory);
+        String url = "https://fakestoreapi.com/products/category/".concat(category);
+        return categoryServiceHelper(url);
     }
+
+    private List<Object> categoryServiceHelper(String url) {
+        Object[] listOfObjects = restTemplate.getForObject(url, Object[].class);
+        if(listOfObjects == null) return Collections.emptyList();
+        return List.of(listOfObjects);
+    }
+
 }
